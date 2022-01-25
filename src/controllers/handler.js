@@ -5426,13 +5426,16 @@ export default function luckysheetHandler() {
                         $tr.find("td").each(function () {
                             let $td = $(this);
                             let cell = {};
-                            let txt = $td.text();
+
+                            // Replace "\n " to remove automatically added line break from
+                            const txt = $td.text()
+                                .replaceAll("\n ", "");
                             if ($.trim(txt).length == 0) {
                                 cell.v = null;
                                 cell.m = "";
                             }
                             else {
-                                let mask = genarate($td.text());
+                                let mask = genarate(txt);
                                 cell.v = mask[2];
                                 cell.ct = mask[1];
                                 cell.m = mask[0];
