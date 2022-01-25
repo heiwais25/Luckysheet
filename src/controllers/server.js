@@ -201,7 +201,7 @@ const server = {
 				Store.result = result
 				let data = new Function("return " + result.data)();
         method.createHookFunction('cooperativeMessage', data)
-				console.info(data);
+				console.info({data});
 				let type = data.type;
 				let {message,id} = data;
 				// 用户退出时，关闭协同编辑时其提示框
@@ -214,20 +214,21 @@ const server = {
 						return value.id != id
 					})
 				}
-	            if(type == 1){ //send 成功或失败
-                const oldIndex = data.data.v.index;
-                const sheetToUpdate = Store.luckysheetfile.filter((sheet)=> sheet.index === oldIndex)[0];
-                if (sheetToUpdate !== null) {
-                  setTimeout(() => {
-                    const index = data.data.i;
-                    sheetToUpdate.index = index;
-                    Store.currentSheetIndex = index;
+				if(type == 1){ //send 成功或失败
+					// It doesn't work with old Java server implementation
+					// const oldIndex = data.data.v.index;
+					// const sheetToUpdate = Store.luckysheetfile.filter((sheet)=> sheet.index === oldIndex)[0];
+					// if (sheetToUpdate !== null) {
+					// setTimeout(() => {
+					// 	const index = data.data.i;
+					// 	sheetToUpdate.index = index;
+					// 	Store.currentSheetIndex = index;
 
-                    $(`#luckysheet-sheets-item${oldIndex}`).attr('data-index', index);
-                    $(`#luckysheet-sheets-item${oldIndex}`).prop('id', `luckysheet-sheets-item${index}`);
-                    $(`#luckysheet-datavisual-selection-set-${oldIndex}`).prop('id', `luckysheet-datavisual-selection-set-${index}`);
-                  }, 1);
-                }
+					// 	$(`#luckysheet-sheets-item${oldIndex}`).attr('data-index', index);
+					// 	$(`#luckysheet-sheets-item${oldIndex}`).prop('id', `luckysheet-sheets-item${index}`);
+					// 	$(`#luckysheet-datavisual-selection-set-${oldIndex}`).prop('id', `luckysheet-datavisual-selection-set-${index}`);
+					// }, 1);
+					// }
 	            }
 	            else if(type == 2){ //更新数据
 	                let item = JSON.parse(data.data);
