@@ -5284,6 +5284,8 @@ export default function luckysheetHandler() {
             }
 
             let txtdata = clipboardData.getData("text/html") || clipboardData.getData("text/plain");
+            const tableData = clipboardData.getData("Text")
+                .split("\r\n").map(row => row.split("\t"));
 
             //如果标示是qksheet复制的内容，判断剪贴板内容是否是当前页面复制的内容
             let isEqual = true;
@@ -5420,16 +5422,14 @@ export default function luckysheetHandler() {
 
                     let r = 0;
                     let borderInfo = {};
-                    $("#luckysheet-copy-content").find("table tr").each(function () {
+                    $("#luckysheet-copy-content").find("table tr").each(function (rowIdx) {
                         let $tr = $(this);
                         let c = 0;
-                        $tr.find("td").each(function () {
+                        $tr.find("td").each(function (colIdx) {
                             let $td = $(this);
                             let cell = {};
+                            const txt = tableData[rowIdx][colIdx];
 
-                            // Replace "\n " to remove automatically added line break from
-                            const txt = $td.text()
-                                .replaceAll("\n ", "");
                             if ($.trim(txt).length == 0) {
                                 cell.v = null;
                                 cell.m = "";
