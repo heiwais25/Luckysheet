@@ -200,8 +200,7 @@ const server = {
 	        _this.websocket.onmessage = function(result){
 				Store.result = result
 				let data = new Function("return " + result.data)();
-        method.createHookFunction('cooperativeMessage', data)
-				console.info({data});
+		        method.createHookFunction('cooperativeMessage', data)
 				let type = data.type;
 				let {message,id} = data;
 				// 用户退出时，关闭协同编辑时其提示框
@@ -1120,7 +1119,7 @@ const server = {
             //     iscommpress = true;
             // }
             _this.requestLock = true;
-            //console.log(params);
+            //{console.log(}params);
             // console.log("request");
             if(_this.updateUrl != ""){
                 $.post(_this.updateUrl, { compress: iscommpress, gridKey: _this.gridKey, data: params }, function (data) {
