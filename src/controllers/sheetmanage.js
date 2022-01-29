@@ -634,13 +634,14 @@ const sheetmanage = {
 
         return ret;
     },
-    buildGridData: function(file) {
+    buildGridData: function(file, loadNewSheet=false) {
         // 如果已经存在二维数据data,那么直接返回data；如果只有celldata，那么就转化成二维数组data，再返回
         let row = file.row == null ? Store.defaultrowNum : file.row, 
             column = file.column == null ? Store.defaultcolumnNum : file.column,
             data = file.data && file.data.length > 0 ? file.data : datagridgrowth([], row, column),
             celldata = file.celldata;
-        if (file.data && file.data.length > 0) {
+
+        if (!loadNewSheet && file.data && file.data.length > 0) {
             for (let i = 0; i < data.length; i++) {
                 for (let j = 0; j < data[0].length; j++) {
                     setcellvalue(i, j, data, data[i][j]);
@@ -966,10 +967,9 @@ const sheetmanage = {
                             }
 
                             let otherfile = Store.luckysheetfile[_this.getSheetIndex(item)];
-                            
                             if(otherfile["load"] == null || otherfile["load"] == "0"){
                                 otherfile.celldata = dataset[item.toString()];
-                                otherfile["data"] = _this.buildGridData(otherfile);
+                                otherfile["data"] = _this.buildGridData(otherfile, true);
                                 otherfile["load"] = "1";
                             }
                         }
@@ -1290,11 +1290,11 @@ const sheetmanage = {
                 $("#luckysheet-grid-window-1").append(luckysheetlodingHTML());
 
                 let sheetindex = _this.checkLoadSheetIndex(file);
-                
+
                 $.post(loadSheetUrl, {"gridKey" : server.gridKey, "index": sheetindex.join(",")}, function (d) {
                     let dataset = new Function("return " + d)();
                     file.celldata = dataset[index.toString()];
-                    let data = _this.buildGridData(file);
+                    let data = _this.buildGridData(file, true);
 
                     setTimeout(function(){
                         Store.loadingObj.close()
@@ -1309,7 +1309,7 @@ const sheetmanage = {
                         
                         if(otherfile["load"] == null || otherfile["load"] == "0"){
                             otherfile.celldata = dataset[item.toString()];
-                            otherfile["data"] = _this.buildGridData(otherfile);
+                            otherfile["data"] = _this.buildGridData(otherfile, true);
                             otherfile["load"] = "1";
                         }
                     }

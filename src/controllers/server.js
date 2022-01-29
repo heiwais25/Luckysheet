@@ -196,7 +196,7 @@ const server = {
 	            }, 60000);
 	        }
 
-	        //客户端接收服务端数据时触发
+	        // Triggered when the client receives data from the server
 	        _this.websocket.onmessage = function(result){
 				Store.result = result
 				let data = new Function("return " + result.data)();
@@ -229,7 +229,7 @@ const server = {
 					// }, 1);
 					// }
 	            }
-	            else if(type == 2){ //更新数据
+	            else if(type == 2){ // update data
 	                let item = JSON.parse(data.data);
 					_this.wsUpdateMsg(item);
 					let chang_data = JSON.parse(data.data)
@@ -336,7 +336,7 @@ const server = {
 						$("#luckysheet-multipleRange-show-" + id + ">.username").css({"bottom":change_bottom + 'px'})
 					}
 	            }
-	            else if(type == 4){ //批量指令更新
+	            else if(type == 4){ // Bulk instruction update
 					// let items = JSON.parse(data.data);
 
 					// After editing by multiple people, data.data may appear as an empty string
@@ -391,7 +391,7 @@ const server = {
 	        return;
 	    }
 
-	    if(type == "v"){ //单个单元格数据更新
+	    if(type == "v"){ // Single cell data update
 	        if(file.data == null || file.data.length == 0){
 	            return;
 	        }
@@ -600,7 +600,7 @@ const server = {
 				}
 			}
 	    }
-	    else if(type == "fc"){ //函数链calc
+	    else if(type == "fc"){ // function chain calc
 	        let op = item.op, pos = item.pos;
 
 	        if(getObjType(value) != "object"){
