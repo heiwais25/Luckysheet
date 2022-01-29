@@ -96,9 +96,11 @@ export function getCellValue(row, column, options = {}) {
 }
 
 /**
- * 设置单元格的值
+ * set cell value
  *
- * 关键点：如果设置了公式，则需要更新公式链insertUpdateFunctionGroup，如果设置了不是公式，判断之前是公式，则需要清除公式delFunctionGroup
+ * Key point: If a formula is set, the formula chain insertUpdateFunctionGroup needs to be updated. 
+ * If it is not a formula and it is a formula before it is judged, the formula delFunctionGroup needs 
+ * to be cleared.
  *
  * @param {Number} row 单元格所在行数；从0开始的整数，0表示第一行
  * @param {Number} column 单元格所在列数；从0开始的整数，0表示第一列

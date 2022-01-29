@@ -5310,10 +5310,7 @@ const luckysheetformula = {
 
         }
 
-        // console.timeEnd("1");
-
-        // console.time("2");
-        //形成一个公式之间引用的图结构
+        // Form a graph structure of references between formulas
         Object.keys(formulaObjects).forEach((key) => {
             let formulaObject = formulaObjects[key];
             arrayMatch(formulaObject.formulaArray, formulaObjects, updateValueOjects, function (childKey) {
@@ -5339,14 +5336,7 @@ const luckysheetformula = {
 
         // console.time("3");
         let formulaRunList = [];
-        //计算，采用深度优先遍历公式形成的图结构
-
-        // updateValueArray.forEach((key)=>{
-        //     let formulaObject = formulaObjects[key];
-
-
-        // });
-
+        // Calculation, using the graph structure formed by the depth-first traversal formula
         let stack = updateValueArray, existsFormulaRunList = {};
         while (stack.length > 0) {
             let formulaObject = stack.pop();
@@ -5715,7 +5705,8 @@ const luckysheetformula = {
                 updateValue.v = item.v;
                 updateValue.f = item.f;
                 setcellvalue(item.r, item.c, data, updateValue);
-                server.saveParam("v", item.index, item.v, {
+                const cellData = data[item.r][item.c];
+                server.saveParam("v", item.index, cellData, {
                     "r": item.r,
                     "c": item.c
                 });
