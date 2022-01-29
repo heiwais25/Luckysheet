@@ -968,7 +968,13 @@ export function keyboardInitial(){
             $("#luckysheet_info_detail_input").css("width", inputlen);
         }
     }).change(function(){
-        server.saveParam("na", null, $(this).val());
+        const newName = $(this).val();
+        if(!newName) {
+            alert("New name should not be empty");
+            return;
+        }
+
+        server.saveParam("na", null, newName);
     });
 
 
