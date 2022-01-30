@@ -472,18 +472,18 @@ function initialProtectionRangeModal(file){
         "content": `
             <div class="luckysheet-protection-rangeItem-content">
                 <div class="luckysheet-slider-protection-row">
-                    <div class="luckysheet-slider-protection-column luckysheet-protection-column-3x">
+                    <div class="luckysheet-slider-protection-column">
                         ${local_protection.allowRangeAddTitle}
                     </div>
-                    <div class="luckysheet-slider-protection-column luckysheet-protection-column-7x" style="left:30%">
+                    <div class="luckysheet-slider-protection-column">
                         <input class="luckysheet-protection-rangeItemiInput" id="protection-allowRangeAdd-title"  placeHolder="${local_protection.allowRangeAddtitleDefault}">
                     </div>
                 </div>
                 <div class="luckysheet-slider-protection-row">
-                    <div class="luckysheet-slider-protection-column luckysheet-protection-column-3x">
+                    <div class="luckysheet-slider-protection-column">
                         ${local_protection.allowRangeAddSqrf}
                     </div>
-                    <div class="luckysheet-slider-protection-column luckysheet-protection-column-7x" style="left:30%">
+                    <div class="luckysheet-slider-protection-column">
                         <div id="protection-allowRangeAdd-range" class="range">
                             <input class="formulaInputFocus" spellcheck="false" placeHolder="${local_protection.selectCellRangeHolder}">
                             <i class="fa fa-table" aria-hidden="true" title="${local_protection.selectCellRange}"></i>
@@ -491,18 +491,18 @@ function initialProtectionRangeModal(file){
                     </div>
                 </div>
                 <div class="luckysheet-slider-protection-row">
-                    <div class="luckysheet-slider-protection-column luckysheet-protection-column-3x">
+                    <div class="luckysheet-slider-protection-column">
                         ${local_protection.allowRangeAddTitlePassword}
                     </div>
-                    <div class="luckysheet-slider-protection-column luckysheet-protection-column-7x" style="left:30%">
+                    <div class="luckysheet-slider-protection-column">
                         <input class="luckysheet-protection-rangeItemiInput" id="protection-allowRangeAdd-password"  placeHolder="${local_protection.enterPassword}">
                     </div>
                 </div>
                 <div class="luckysheet-slider-protection-row">
-                    <div class="luckysheet-slider-protection-column luckysheet-protection-column-3x">
+                    <div class="luckysheet-slider-protection-column">
                         ${local_protection.allowRangeAddTitleHint}
                     </div>
-                    <div class="luckysheet-slider-protection-column luckysheet-protection-column-7x" style="left:30%">
+                    <div class="luckysheet-slider-protection-column">
                         <textarea class="luckysheet-protection-rangeItemTextarea" id="protection-allowRangeAdd-hint"  placeHolder="${local_protection.allowRangeAddTitleHintTitle}"></textarea>
                     </div>
                 </div>
