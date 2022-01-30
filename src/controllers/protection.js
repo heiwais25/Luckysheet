@@ -47,9 +47,6 @@ function addRangeItem(item){
 
     let rangeItemTemplate = `
         <div class="luckysheet-protection-rangeItem" title="${local_protection.rangeItemDblclick}">
-            <div class="luckysheet-protection-rangeItem-del" title="${locale_button.delete}">
-                <i class="icon iconfont luckysheet-iconfont-shanchu"></i>
-            </div>
             <div class="luckysheet-protection-rangeItem-name" title="${title}">
                 ${title}${passwordTxt}
             </div>
@@ -58,6 +55,9 @@ function addRangeItem(item){
             </div>
             <div class="luckysheet-protection-rangeItem-update" title="${locale_button.update}">
                 <i class="icon iconfont luckysheet-iconfont-bianji"></i>
+            </div>
+            <div class="luckysheet-protection-rangeItem-del" title="${locale_button.delete}">
+                <i class="icon iconfont luckysheet-iconfont-shanchu"></i>
             </div>
         </div>
     `;
@@ -339,13 +339,12 @@ function initialEvent(file){
         }
     });
 
-
-    //Cell range select controll
+    // Cell range select controll
     $(document).off("click.luckysheetProtection.dvRange").on("click.luckysheetProtection.dvRange", "#protection-allowRangeAdd-range .fa-table", function(e) {
         $("#luckysheet-protection-rangeItem-dialog").hide();
 
         let dataSource = "0";
-        let txt = $(this).siblings("input").val().trim(); 
+        let txt = $(this).parent().siblings("input").val().trim(); 
 
         dataVerificationCtrl.rangeDialog(dataSource, txt);
 
@@ -385,7 +384,7 @@ function initialEvent(file){
         $("#luckysheet-protection-rangeItem-dialog").hide();
 
         let dataSource = "1";
-        let txt = $(this).siblings("input").val().trim(); 
+        let txt = $(this).parent().siblings("input").val().trim(); 
 
         dataVerificationCtrl.rangeDialog(dataSource, txt);
 
@@ -486,7 +485,9 @@ function initialProtectionRangeModal(file){
                     <div class="luckysheet-slider-protection-column">
                         <div id="protection-allowRangeAdd-range" class="range">
                             <input class="formulaInputFocus" spellcheck="false" placeHolder="${local_protection.selectCellRangeHolder}">
-                            <i class="fa fa-table" aria-hidden="true" title="${local_protection.selectCellRange}"></i>
+                            <div class="protection-allowRangeAdd-range-calendar-icon">
+                                <i class="fa fa-table" aria-hidden="true" title="${local_protection.selectCellRange}"></i>
+                            </div>
                         </div>
                     </div>
                 </div>

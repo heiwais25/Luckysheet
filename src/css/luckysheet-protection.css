@@ -189,10 +189,15 @@
 .luckysheet-protection-rangeItem{
     position: relative;
     width: 100%;
-    height: 30px;
-    line-height: 30px;
     font-size: 12px;
     overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr 20px 20px;
+    grid-gap: 4px;
+}
+
+.luckysheet-protection-rangeItem:not(:last-child) {
+    margin-bottom: 8px;
 }
 
 .luckysheet-protection-rangeItem:hover{
@@ -200,15 +205,14 @@
 }
 
 .luckysheet-protection-rangeItem > div{
-    position: absolute;
     height: 100%;
     text-align: center;
-    overflow: hidden;
+    word-break: break-all;
+    display: flex;
+    align-items: center;
 }
 
 .luckysheet-protection-rangeItem .luckysheet-protection-rangeItem-del{
-    left: 5px;
-    top:5px;
     height: 20px;
     width: 20px;
     font-size: 14px;
@@ -217,21 +221,16 @@
 }
 
 .luckysheet-protection-rangeItem .luckysheet-protection-rangeItem-name{
-    left: 30px;
-    width: 80px;
     text-align: left;
 }
 
-.luckysheet-protection-rangeItem .luckysheet-protection-rangeItem-range{
-    left: 110px;
-    width: 120px;
+#luckysheet-protection-rangeItem-container {
+    margin-top: 8px;
 }
 
 .luckysheet-protection-rangeItem .luckysheet-protection-rangeItem-update{
-    left: 230px;
     width: 30px;
     font-size: 14px;
-    top: 5px;
     height: 20px;
     width: 20px;
     line-height: 20px;
@@ -268,8 +267,14 @@
     width: 100%;
 }
 
-.luckysheet-protection-rangeItem-content input, textarea {
+.luckysheet-protection-rangeItem-content input {
     padding: 8px 12px;
+    box-sizing: border-box;
+}
+
+.luckysheet-protection-rangeItem-content textarea {
+    padding: 8px 12px;
+    box-sizing: border-box;
 }
 
 .luckysheet-protection-rangeItem-content .luckysheet-protection-rangeItemiInput {
@@ -282,20 +287,29 @@
     border: 1px solid #d4d4d4;
 }
 
+#protection-allowRangeAdd-range {
+    display: flex;
+}
+
+#protection-allowRangeAdd-range input {
+    flex-grow: 1;
+}
+
+.protection-allowRangeAdd-range-calendar-icon {
+    display: flex;
+    width: 30px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 #luckysheet-protection-rangeItem-dialog .luckysheet-slider-protection-column .range input {
-    width: calc(100% - 30px);
-    /* height: 30px; */
-    /* float: left; */
     border: none;
     outline-style: none;
     box-sizing: border-box;
 }
 
 #luckysheet-protection-rangeItem-dialog .luckysheet-slider-protection-column .range i.fa-table {
-    float: right;
-    margin-top: 9px;
-    margin-right: 5px;
-    cursor: pointer;
     color: #6598F3;
 }
 
