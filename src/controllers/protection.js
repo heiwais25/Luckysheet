@@ -71,7 +71,7 @@ function initialEvent(file){
     const local_protection = _locale.protection;
     const locale_button = _locale.button;
 
-    //confirm protection
+    // confirm protection
     $("#luckysheet-slider-protection-ok").click(function() {
         let password = $("#protection-password").val();
         let sheet = $("#protection-swichProtectionState").is(":checked");
@@ -133,7 +133,7 @@ function initialEvent(file){
         closeProtectionModal();
     });
 
-    //Add allow edit range
+    // Add allow edit range
     $("#luckysheet-slider-protection-addRange").click(function(){
         initialProtectionRangeModal();
         isAddRangeItemState = true;
@@ -148,7 +148,7 @@ function initialEvent(file){
 
     });
 
-    //update allow edit range
+    // update allow edit range
     $(document).off("click.luckysheetProtection.rangeItemUpdate").on("click.luckysheetProtection.rangeItemUpdate","#luckysheet-protection-rangeItem-container .luckysheet-protection-rangeItem-update", function(e){
         initialProtectionRangeModal();
 
@@ -178,7 +178,7 @@ function initialEvent(file){
         $("#protection-allowRangeAdd-hint").val(item.hintText);
     });
 
-    //delete allow edit range
+    // delete allow edit range
     $(document).off("click.luckysheetProtection.rangeItemDelete").on("click.luckysheetProtection.rangeItemDelete","#luckysheet-protection-rangeItem-container .luckysheet-protection-rangeItem-del", function(e){
         let $rangeItem = $(e.target).closest(".luckysheet-protection-rangeItem");
 
@@ -192,7 +192,7 @@ function initialEvent(file){
         $rangeItem.remove();
     });
 
-    //confirm allow edit range
+    // confirm allow edit range
     $(document).off("click.luckysheetProtection.rangeItemConfirm").on("click.luckysheetProtection.rangeItemConfirm","#luckysheet-protection-rangeItem-confirm", function(){
         let name = $("#protection-allowRangeAdd-title").val(),
         rangeText = $("#protection-allowRangeAdd-range input").val(),
@@ -272,7 +272,7 @@ function initialEvent(file){
     });
 
 
-    //sheet validation check passWord
+    // sheet validation check passWord
     $(document).off("click.luckysheetProtection.validationConfirm").on("click.luckysheetProtection.validationConfirm","#luckysheet-protection-sheet-validation-confirm", function(e){
         let $validation = $("#luckysheet-protection-sheet-validation");
         let aut = validationAuthority;
@@ -600,8 +600,12 @@ function initialProtectionRIghtBar(file){
 
     $("body").append(protectionModalHtml);
 
+    let hintText = "";
+    if(file.config && file.config.authority && file.config.authority.hintText) {
+        hintText = `Hint: ${file.config.authority.hintText}`;
+    }
 
-    //Password input initial for sheet Protection
+    // Password input initial for sheet Protection
     $("body").append(replaceHtml(modelHTML, { 
         "id": "luckysheet-protection-sheet-validation", 
         "addclass": "luckysheet-protection-sheet-validation", 
@@ -610,6 +614,8 @@ function initialProtectionRIghtBar(file){
             <div class="luckysheet-slider-protection-row">
                 <div class="luckysheet-slider-protection-column luckysheet-protection-column-10x">
                     ${local_protection.validationTips}
+                </div>
+                <div id="luckysheet-protection-validation-hint" class="luckysheet-slider-protection-column luckysheet-protection-column-10x">
                 </div>
             </div>
             <div class="luckysheet-slider-protection-row" style="margin-top:20px">
@@ -623,6 +629,9 @@ function initialProtectionRIghtBar(file){
         "style": "z-index:100003" 
     }));
 
+    if(hintText) {
+        $("#luckysheet-protection-validation-hint").text(hintText).css("margin-top", "4px");
+    }
 }
 
 
@@ -721,9 +730,6 @@ export function closeProtectionModal(){
     luckysheetsizeauto();
 }
 
-
-
-
 function checkProtectionLockedSqref(r, c, aut, local_protection, isOpenAlert=true, isLock=true){
     let isPass = false;
     let rangeAut = aut.allowRangeList;
@@ -767,13 +773,13 @@ function checkProtectionLockedSqref(r, c, aut, local_protection, isOpenAlert=tru
     if (!isPass && !isLock) isPass = true
     if(!isPass && isOpenAlert){
         let ht;
-        if(aut.hintText != null && aut.hintText.length>0){
-            ht = aut.hintText;
-        }
-        else{
-            ht = local_protection.defaultSheetHintText;
-        }
-        tooltip.info("", ht, true);
+        // if(aut.hintText != null && aut.hintText.length>0){
+        //     ht = aut.hintText;
+        // }
+        // else{
+        //     ht = local_protection.defaultSheetHintText;
+        // }
+        tooltip.info("", local_protection.defaultSheetHintText, true);
         $("#luckysheet-selection-copy .luckysheet-selection-copy").hide();
     }
     
@@ -812,8 +818,6 @@ function openRangePasswordModal(rangeAut) {
 
     initialRangePasswordHtml = true;
 
-
-    
     openSelfModel("luckysheet-protection-range-validation");
 
     let $hint = $("#luckysheet-protection-range-validation-hint");

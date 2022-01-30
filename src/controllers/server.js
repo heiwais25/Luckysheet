@@ -255,8 +255,19 @@ const server = {
 					if(flag) {
 						Store.cooperativeEdit.changeCollaborationSize.forEach(val => {
 							if(val.id == id) {
-								val.v = item.v[0] || item.range[0]
-								val.i = index
+								let curV = item.v[0];
+								if(!curV) {
+									if(item.range) {
+										curV = item.range[0];	
+									} else if(item.v.range) {
+										curV = item.v.range[0];	
+									}
+								}
+
+								if(curV) {
+									val.v = curV
+									val.i = index
+								}
 							}
 						})
 					} else {
