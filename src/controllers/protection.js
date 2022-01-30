@@ -10,6 +10,7 @@ import { replaceHtml,transformRangeToAbsolute,openSelfModel } from '../utils/uti
 import { selectionCopyShow } from './select';
 import tooltip from '../global/tooltip';
 import cleargridelement from '../global/cleargridelement';
+import server from './server';
 
 let isInitialProtection = false, isInitialProtectionAddRang = false, rangeItemListCache=[], isAddRangeItemState=true, updateRangeItemIndex = null, validationAuthority=null, updatingSheetFile=null, firstInputSheetProtectionPassword = true;
 let sqrefMapCache = {}, inputRangeProtectionPassword = {}, initialRangePasswordHtml=false;
@@ -71,48 +72,44 @@ function initialEvent(file){
     const locale_button = _locale.button;
 
     //confirm protection
-    $("#luckysheet-slider-protection-ok").click(function(){
+    $("#luckysheet-slider-protection-ok").click(function() {
         let password = $("#protection-password").val();
         let sheet = $("#protection-swichProtectionState").is(":checked");
         let hint = $("#protection-hint").val();
 
-        let file = updatingSheetFile, aut = {};
+        let file = updatingSheetFile,
+            aut = {};
 
-        if(file!=null && file.config!=null && file.config.authority!=null){
+        if (file != null && file.config != null && file.config.authority != null) {
             aut = file.config.authority;
-        }        
-        
-        let authorityData = {
-
         }
 
-        let algorithmName = "None";
-        if(password!="••••••••"){
+        let authorityData = {};
+
+        if (password !== "••••••••") {
             authorityData.password = password;
             authorityData.algorithmName = "None";
-            authorityData.saltValue = null;
-        }
-        else if(aut!=null){
+            authorityData.saltValue = "";
+        } else if (aut !== null) {
             authorityData.algorithmName = aut.algorithmName;
             authorityData.saltValue = aut.saltValue;
             authorityData.password = aut.password;
-        }
-        else {
+        } else {
             authorityData.algorithmName = "None";
-            authorityData.saltValue = null;
+            authorityData.saltValue = "";
             authorityData.password = "";
         }
 
         authorityData.hintText = hint;
 
-        authorityData.sheet = sheet==true?1:0;
+        authorityData.sheet = sheet == true ? 1 : 0;
 
-        for(let i=0;i<authorityItemArr.length;i++){
+        for (let i = 0; i < authorityItemArr.length; i++) {
             let name = authorityItemArr[i];
             let checkId = "luckysheet-protection-check-" + name;
-            let authorityValue =  $("#"+checkId).is(':checked');
-            
-            authorityData[name] = authorityValue==true?1:0;
+            let authorityValue = $("#" + checkId).is(":checked");
+
+            authorityData[name] = authorityValue === true ? 1 : 0;
         }
 
         authorityData.allowRangeList = rangeItemListCache;
@@ -120,16 +117,15 @@ function initialEvent(file){
         rangeItemListCache = [];
         firstInputSheetProtectionPassword = true;
 
-        if(file.config==null){
+        if (file.config == null) {
             file.config = {};
         }
 
         file.config.authority = authorityData;
+        server.saveParam("cg", file.index, authorityData, { "k": "authority" });
 
         inputRangeProtectionPassword = {};
-
         closeProtectionModal();
-
     });
 
     //cancel protection
@@ -550,7 +546,7 @@ function initialProtectionRIghtBar(file){
                 </div>
                 <div class="luckysheet-slider-protection-row" style="height:23px;">
                     <div class="luckysheet-slider-protection-column" style="width:98%;">
-                        <input class="luckysheet-protection-input" id="protection-password"  placeHolder="${local_protection.enterPassword}">
+                        <input name="password" class="luckysheet-protection-input" id="protection-password"  placeHolder="${local_protection.enterPassword}">
                     </div>
                 </div>
                 <div class="luckysheet-slider-protection-row" style="height:47px;margin-top:4px;">
