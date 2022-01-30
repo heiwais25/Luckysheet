@@ -3,23 +3,64 @@
     background: #fff;
 }
 
+#luckysheet-modal-dialog-slider-protection {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .luckysheet-slider-protection-config{
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
+    box-sizing: border-box;
+}
+
+.luckysheet-slider-protection-password-row {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.luckysheet-slider-protection-password-row div:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.luckysheet-slider-protection-config:not(:last-child) {
+    padding: 8px;
+}
+
+.luckysheet-slider-protection-config:last-child {
+    display: flex;
+    position: absolute;
+    bottom: 0px;
+}
+
+#luckysheet-slider-protection-addRange {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.luckysheet-slider-protection-user-range-select {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .luckysheet-slider-protection-row{
     position: relative;
     width: 98%;
-    height: 35px;
-    left: 1%;
 }
 
 .luckysheet-slider-protection-column{
-    position: absolute;
+    /* position: absolute; */
     height: 100%;
 }
 
+.luckysheet-slider-protection-config input {
+    margin-right: 8px;
+}
+
+.luckysheet-slider-protection-config textarea {
+    font-size: 12px;
+}
 
 .luckysheet-slider-protection-config input, .luckysheet-slider-protection-config textarea, .luckysheet-protection-rangeItem-dialog input, .luckysheet-protection-rangeItem-dialog textarea, .luckysheet-protection-sheet-validation input{
     border: 1px solid #d4d4d4;
@@ -29,6 +70,11 @@
 .luckysheet-slider-protection-config input:focus, .luckysheet-slider-protection-config textarea:focus, .luckysheet-protection-rangeItem-dialog input:focus, .luckysheet-protection-rangeItem-dialog textarea:focus,.luckysheet-protection-sheet-validation input:focus{
     border: 1px solid #0389FB;
     outline: none;
+}
+
+.luckysheet-slider-protection-column label {
+    display: flex;
+    align-items: center;
 }
 
 .luckysheet-protection-input{
@@ -93,7 +139,7 @@
 }
 
 .luckysheet-slider-protection-ok{
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     height: 100%;
     background: #0188fb;
@@ -113,7 +159,7 @@
 }
 
 .luckysheet-slider-protection-cancel{
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     height: 100%;
     background: #e6e6e6;

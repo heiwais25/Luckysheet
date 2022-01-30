@@ -3371,7 +3371,6 @@ fieldset[disabled] .btn-danger.focus {
     background-color: #fff;
     line-height: 1.4em;
     word-wrap: break-word;
-    white-space: pre;
 }
 
 .luckysheet-modal-dialog-buttons {
