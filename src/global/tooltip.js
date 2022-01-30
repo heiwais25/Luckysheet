@@ -5,7 +5,7 @@ import locale from '../locale/locale';
 import server from '../controllers/server';
 
 const tooltip = {
-    info: function (title, content) {
+    info: function (title, content, prewrap=false) {
         $("#luckysheet-modal-dialog-mask").show();
         $("#luckysheet-info").remove();
 
@@ -20,9 +20,15 @@ const tooltip = {
             "botton": '<button class="btn btn-default luckysheet-model-close-btn">&nbsp;&nbsp;'+locale_button.close+'&nbsp;&nbsp;</button>', 
             "style": "z-index:100003" 
         }));
-        let $t = $("#luckysheet-info").find(".luckysheet-modal-dialog-content").css("min-width", 300).end(), 
+        const dialogContent = $("#luckysheet-info").find(".luckysheet-modal-dialog-content");
+        if(prewrap) {
+            dialogContent.css("white-space", "pre-wrap").end();
+        }
+
+        let $t = dialogContent.css("min-width", 300).end(), 
             myh = $t.outerHeight(), 
             myw = $t.outerWidth();
+
         let winw = $(window).width(), winh = $(window).height();
         let scrollLeft = $(document).scrollLeft(), scrollTop = $(document).scrollTop();
         $("#luckysheet-info").css({ "left": (winw + scrollLeft - myw) / 2, "top": (winh + scrollTop - myh) / 3 }).show();

@@ -773,7 +773,7 @@ function checkProtectionLockedSqref(r, c, aut, local_protection, isOpenAlert=tru
         else{
             ht = local_protection.defaultSheetHintText;
         }
-        tooltip.info("", ht);
+        tooltip.info("", ht, true);
         $("#luckysheet-selection-copy .luckysheet-selection-copy").hide();
     }
     
