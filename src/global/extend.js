@@ -126,45 +126,47 @@ function luckysheetextendtable(type, index, value, direction, sheetIndex) {
             let calc = $.extend(true, {}, calcChain[i]);
             let calc_r = calc.r, calc_c = calc.c, calc_i = calc.index, calc_funcStr =  getcellFormula(calc_r, calc_c, calc_i);
 
-            if(type == "row"){
-                let functionStr = "=" + formula.functionStrChange(calc_funcStr, "add", "row", direction, index, value);
-
-                if(d[calc_r][calc_c] && d[calc_r][calc_c].f == calc_funcStr){
-                    d[calc_r][calc_c].f = functionStr;
-                }
-
-                if(direction == "lefttop"){
-                    if(calc_r >= index){
-                        calc.r += value;
+            if(calc_funcStr) {
+                if(type == "row"){
+                    let functionStr = "=" + formula.functionStrChange(calc_funcStr, "add", "row", direction, index, value);
+    
+                    if(d[calc_r][calc_c] && d[calc_r][calc_c].f == calc_funcStr){
+                        d[calc_r][calc_c].f = functionStr;
                     }
-                }
-                else if(direction == "rightbottom"){
-                    if(calc_r > index){
-                        calc.r += value;
+    
+                    if(direction == "lefttop"){
+                        if(calc_r >= index){
+                            calc.r += value;
+                        }
                     }
-                }
-
-                newCalcChain.push(calc);
-            }
-            else if(type == "column"){
-                let functionStr = "=" + formula.functionStrChange(calc_funcStr, "add", "col", direction, index, value);
-
-                if(d[calc_r][calc_c] && d[calc_r][calc_c].f == calc_funcStr){
-                    d[calc_r][calc_c].f = functionStr;
-                }
-
-                if(direction == "lefttop"){
-                    if(calc_c >= index){
-                        calc.c += value;
+                    else if(direction == "rightbottom"){
+                        if(calc_r > index){
+                            calc.r += value;
+                        }
                     }
+    
+                    newCalcChain.push(calc);
                 }
-                else if(direction == "rightbottom"){
-                    if(calc_c > index){
-                        calc.c += value;
+                else if(type == "column"){
+                    let functionStr = "=" + formula.functionStrChange(calc_funcStr, "add", "col", direction, index, value);
+    
+                    if(d[calc_r][calc_c] && d[calc_r][calc_c].f == calc_funcStr){
+                        d[calc_r][calc_c].f = functionStr;
                     }
+    
+                    if(direction == "lefttop"){
+                        if(calc_c >= index){
+                            calc.c += value;
+                        }
+                    }
+                    else if(direction == "rightbottom"){
+                        if(calc_c > index){
+                            calc.c += value;
+                        }
+                    }
+    
+                    newCalcChain.push(calc);
                 }
-
-                newCalcChain.push(calc);
             }
         }
     }
@@ -1170,34 +1172,36 @@ function luckysheetdeletetable(type, st, ed, sheetIndex) {
             let calc = $.extend(true, {}, calcChain[i]);
             let calc_r = calc.r, calc_c = calc.c, calc_i = calc.index, calc_funcStr =  getcellFormula(calc_r, calc_c, calc_i);
 
-            if(type == "row"){
-                if(calc_r < st || calc_r > ed){
-                    let functionStr = "=" + formula.functionStrChange(calc_funcStr, "del", "row", null, st, slen);
-
-                    if(d[calc_r][calc_c] && d[calc_r][calc_c].f == calc_funcStr){
-                        d[calc_r][calc_c].f = functionStr;
+            if(calc_funcStr){
+                if(type == "row"){
+                    if(calc_r < st || calc_r > ed){
+                        let functionStr = "=" + formula.functionStrChange(calc_funcStr, "del", "row", null, st, slen);
+    
+                        if(d[calc_r][calc_c] && d[calc_r][calc_c].f == calc_funcStr){
+                            d[calc_r][calc_c].f = functionStr;
+                        }
+    
+                        if(calc_r > ed){
+                            calc.r = calc_r - slen;
+                        }
+    
+                        newCalcChain.push(calc);
                     }
-
-                    if(calc_r > ed){
-                        calc.r = calc_r - slen;
-                    }
-
-                    newCalcChain.push(calc);
                 }
-            }
-            else if(type == "column"){
-                if(calc_c < st || calc_c > ed){
-                    let functionStr = "=" + formula.functionStrChange(calc_funcStr, "del", "col", null, st, slen);
-
-                    if(d[calc_r][calc_c] && d[calc_r][calc_c].f == calc_funcStr){
-                        d[calc_r][calc_c].f = functionStr;
+                else if(type == "column"){
+                    if(calc_c < st || calc_c > ed){
+                        let functionStr = "=" + formula.functionStrChange(calc_funcStr, "del", "col", null, st, slen);
+    
+                        if(d[calc_r][calc_c] && d[calc_r][calc_c].f == calc_funcStr){
+                            d[calc_r][calc_c].f = functionStr;
+                        }
+    
+                        if(calc_c > ed){
+                            calc.c = calc_c - slen;
+                        }
+    
+                        newCalcChain.push(calc);
                     }
-
-                    if(calc_c > ed){
-                        calc.c = calc_c - slen;
-                    }
-
-                    newCalcChain.push(calc);
                 }
             }
         }
@@ -1955,7 +1959,7 @@ function luckysheetDeleteCell(type, str, edr, stc, edc, sheetIndex) {
             let calc = $.extend(true, {}, calcChain[i]);
             let calc_r = calc.r, calc_c = calc.c, calc_i = calc.index, calc_funcStr =  getcellFormula(calc_r, calc_c, calc_i);
 
-            if(calc_r < str || calc_r > edr || calc_c < stc || calc_c > edc){
+            if(calc_funcStr && (calc_r < str || calc_r > edr || calc_c < stc || calc_c > edc)){
                 let functionStr;
 
                 if(type == 'moveLeft'){
