@@ -16,8 +16,10 @@ const gridHTML = function(){
                         <div id ="luckysheet_info_detail" class="luckysheet_info_detail"> 
                             <div data-tips="${locale_info.return}" id="luckysheet_info_detail_title" class="luckysheet_info_detail_back"> 
                                 <i style="color:#444D5A;" class="fa fa-angle-left fa-2x" aria-hidden="true"></i> 
-                            </div> 
-                            <div class="luckysheet-share-logo" title="\${logotitle}"></div>
+                            </div>
+                            <a href="/">
+                                <div class="luckysheet-share-logo" title="Go to home"></div>
+                            </a>
                             <div class="sheet-name"> 
                                 <input data-tips="${locale_info.tips}" id="luckysheet_info_detail_input" class="luckysheet_info_detail_input luckysheet-mousedown-cancel" value="${locale_info.noName}" tabindex="0" dir="ltr" aria-label="${locale_info.rename}" style="visibility: visible; width: 149px;" data-tooltip="${locale_info.rename}"> 
                             </div> 
