@@ -91,7 +91,7 @@ luckysheet.create = function (setting) {
     luckysheetConfigsetting.autoFormatw = extendsetting.autoFormatw;
     luckysheetConfigsetting.accuracy = extendsetting.accuracy;
     luckysheetConfigsetting.total = extendsetting.data[0].total;
-
+    luckysheetConfigsetting.applyTextWrap = extendsetting.applyTextWrap;
     luckysheetConfigsetting.loading = extendsetting.loading;
     luckysheetConfigsetting.allowCopy = extendsetting.allowCopy;
     luckysheetConfigsetting.showtoolbar = extendsetting.showtoolbar;

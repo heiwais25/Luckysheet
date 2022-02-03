@@ -5,7 +5,7 @@ import { setcellvalue } from '../global/setdata';
 import luckysheetcreatedom from '../global/createdom';
 import tooltip from '../global/tooltip';
 import formula from '../global/formula';
-import { luckysheetrefreshgrid, jfrefreshgrid_rhcw } from '../global/refresh';
+import { luckysheetrefreshgrid, jfrefreshgrid_rhcw, jfrefreshgrid } from '../global/refresh';
 import rhchInit from '../global/rhchInit';
 import editor from '../global/editor';
 import { luckysheetextendtable, luckysheetdeletetable } from '../global/extend';
@@ -30,6 +30,7 @@ import {changeSheetContainerSize, menuToolBarWidth} from './resize';
 import {zoomNumberDomBind} from './zoom';
 import menuButton from './menuButton';
 import method from '../global/method';
+import { rowlenByRange } from '../global/getRowlen';
 
 const sheetmanage = {
     generateRandomSheetIndex: function(prefix) {
@@ -915,6 +916,17 @@ const sheetmanage = {
                         setTimeout(function(){
                             Store.loadingObj.close()
                         }, 500);
+                    }
+
+                    if(luckysheetConfigsetting.applyTextWrap) {
+                        console.log("Recalcualte row length if text-wrap is applied")
+                        const cfg = rowlenByRange(file.data, 0, file.data.length - 1, file.config);
+                        const allParam = {
+                            "cfg": cfg,
+                            "RowlChange": true
+                        }
+                        file.config = cfg;
+                        jfrefreshgrid(file.data, [{ "row": [0, file.data.length - 1], "column": [0, file.data[0].length - 1] }], allParam);
                     }
                 }
 
