@@ -4509,7 +4509,7 @@ export default function luckysheetHandler() {
         let $t = $(this), value = $("#luckysheet-bottom-add-row-input").val();
 
         if (value == "") {            
-            value = luckysheetConfigsetting.addRowCount || 100;
+            value = luckysheetConfigsetting.addRowCount || 1000;
         }
 
         if (isNaN(parseInt(value))) {
@@ -4523,7 +4523,7 @@ export default function luckysheetHandler() {
         }
 
         value = parseInt(value);
-        if (value < 1 || value > 100) {
+        if (value < 1 || value > 1000) {
             if (isEditMode()) {
                 alert(locale_info.tipInputNumberLimit);
             }

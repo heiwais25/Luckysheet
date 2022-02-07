@@ -949,6 +949,8 @@ const sheetmanage = {
                     // }
 
                     _this.loadOtherFile(file);
+
+                    
                     execF();
                 }
                 else{
@@ -1183,6 +1185,17 @@ const sheetmanage = {
             if(otherfile["load"] == null || otherfile["load"] == "0"){
                 otherfile["data"] = _this.buildGridData(otherfile);
                 otherfile["load"] = "1";
+            }
+
+            if(luckysheetConfigsetting.applyTextWrap) {
+                console.log("Recalcualte row length if text-wrap is applied")
+                const cfg = rowlenByRange(otherfile.data, 0, otherfile.data.length - 1, otherfile.config);
+                const allParam = {
+                    "cfg": cfg,
+                    "RowlChange": true
+                }
+                otherfile.config = cfg;
+                jfrefreshgrid(otherfile.data, [{ "row": [0, otherfile.data.length - 1], "column": [0, otherfile.data[0].length - 1] }], allParam);
             }
         }
     },

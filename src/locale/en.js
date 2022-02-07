@@ -8976,7 +8976,7 @@ export default {
         nextPage:"Next",
 
         tipInputNumber:"Please enter the number",
-        tipInputNumberLimit:"The increase range is limited to 1-100",
+        tipInputNumberLimit:"The increase range is limited to 1-1000",
 
         tipRowHeightLimit:"Row height must be between 0 ~ 545",
         tipColumnWidthLimit:"The column width must be between 0 ~ 2038",
